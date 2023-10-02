@@ -535,13 +535,9 @@ class _DesktopCategoryItem extends StatelessWidget {
                 color: colorScheme.background,
               ),
               Flexible(
-                child: ListView.builder(
-                  // Makes integration tests possible.
-                  key: ValueKey('${category.name}DemoList'),
-                  primary: false,
-                  itemBuilder: (context, index) =>
-                      CategoryDemoItem(demo: demos[index]),
-                  itemCount: demos.length,
+                child: ExpandedCategoryDemos(
+                  category: category,
+                  demos: demos,
                 ),
               ),
             ],

@@ -149,7 +149,7 @@ class _CategoryListItemState extends State<CategoryListItem>
       builder: _buildHeaderWithChildren,
       child: _shouldOpenList()
           ? null
-          : _ExpandedCategoryDemos(
+          : ExpandedCategoryDemos(
               category: widget.category,
               demos: widget.demos,
             ),
@@ -252,8 +252,9 @@ class _CategoryHeader extends StatelessWidget {
   }
 }
 
-class _ExpandedCategoryDemos extends StatelessWidget {
-  const _ExpandedCategoryDemos({
+class ExpandedCategoryDemos extends StatelessWidget {
+  const ExpandedCategoryDemos({
+    super.key,
     required this.category,
     required this.demos,
   });
@@ -263,20 +264,19 @@ class _ExpandedCategoryDemos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       // Makes integration tests possible.
       key: ValueKey('${category.name}DemoList'),
+      scrollDirection: Axis.vertical,
       children: [
         for (final demo in demos)
           CategoryDemoItem(
             demo: demo,
           ),
-        const SizedBox(height: 12), // Extra space below.
       ],
     );
   }
 }
-
 class CategoryDemoItem extends StatelessWidget {
   const CategoryDemoItem({super.key, required this.demo});
 
